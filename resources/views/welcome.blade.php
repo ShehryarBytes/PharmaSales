@@ -1,98 +1,66 @@
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="{{ app()->getLocale() }}">
+<head>
+  <meta charset="utf-8">
+  <title>PharmaSales | Welcome</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
 
-        <title>Laravel</title>
+  <!-- Favicons -->
+  <link href="{{asset('img/favicon.png')}}" rel="icon">
+  <link href="{{asset('img/apple-touch-icon.png')}}" rel="apple-touch-icon">
+  <link rel="stylesheet" href="{{asset('bower_components/Ionicons/css/ionicons.min.css')}}">
+  <link rel="stylesheet" href="{{asset('bower_components/font-awesome/css/font-awesome.min.css')}}">
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Roboto:100,300,400,500,700|Philosopher:400,400i,700,700i" rel="stylesheet">
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
+  <!-- Bootstrap css -->
+  <!-- <link rel="stylesheet" href="css/bootstrap.css"> -->
+  <link href="{{asset('lib/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
 
-            .full-height {
-                height: 100vh;
-            }
+  <!-- Libraries CSS Files -->
+  <!-- <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+  <link href="lib/owlcarousel/assets/owl.theme.default.min.css" rel="stylesheet">
+  <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="lib/animate/animate.min.css" rel="stylesheet">
+  <link href="lib/modal-video/css/modal-video.min.css" rel="stylesheet">
+ -->
+  <!-- Main Stylesheet File -->
+  <link href="{{asset('css/style.css')}}" rel="stylesheet">
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
+  <!-- =======================================================
+    Theme Name: eStartup
+    Theme URL: https://bootstrapmade.com/estartup-bootstrap-landing-page-template/
+    Author: BootstrapMade.com
+    License: https://bootstrapmade.com/license/
+  ======================================================= -->
+</head>
     <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
+        <section id="hero" class="wow fadeIn">
+    <div class="hero-container">
+      <h1> Welcome to <span class="logo-lg"><b>Pharma</b>Sales  <small><i class="fa fa-ambulance fa-5x"></i></small></span></h1>
+      <h2>Get Signup for free</h2>
+      <img src="img/hero-img.png" alt="Hero Imgs" class="img-responsive" width="600px" height="400px">
+      
+      @if (Route::has('login'))
+                    @auth
+                        <a href="{{ url('/home') }}" class="btn-get-started scrollto">Home</a>
+                    @else
+                        <span>
+                            <a href="{{ route('login') }}" class="btn-get-started scrollto">Login</a> &nbsp;
+                        <a href="{{ route('register') }}" class="btn-get-started scrollto">Register</a>
+                        </span>
                     @endauth
                 </div>
             @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-            </div>
-        </div>
+    </div>
+  </section><!-- #hero -->
     </body>
+
+
+  <!-- Template Main Javascript File -->
+  <script src="js/main.js"></script>
 </html>
