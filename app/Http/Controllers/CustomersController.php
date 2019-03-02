@@ -14,6 +14,7 @@ class CustomersController extends Controller
     public function index()
     {
         //
+        return view('admin.customers.index');
     }
 
     /**
@@ -24,6 +25,7 @@ class CustomersController extends Controller
     public function create()
     {
         //
+        return view('admin.customers.create');
     }
 
     /**
@@ -66,9 +68,10 @@ class CustomersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update()
     {
         //
+        return view('admin.customers.update');
     }
 
     /**

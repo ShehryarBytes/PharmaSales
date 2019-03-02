@@ -1,5 +1,5 @@
 @extends('layouts.admin')
 
-@section
-products index
+@section('content')
+    Orders Index
 @endsection

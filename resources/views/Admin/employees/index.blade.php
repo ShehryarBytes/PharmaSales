@@ -1,5 +1,5 @@
 @extends('layouts.admin')
 
-@section
-Employee index
+@section('content')
+    Employee index
 @endsection

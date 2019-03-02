@@ -1,5 +1,5 @@
 @extends('layouts.admin')
 
-@section
+@section('content')
 Employee create
 @endsection

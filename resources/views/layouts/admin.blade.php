@@ -339,7 +339,7 @@
           </a>
         </li>
         <li class="treeview">
-          <a href="#">
+          <a href="{{ URL::to('employees') }}">
             <i class="fa fa-users"></i>
             <span>Employees</span>
             <span class="pull-right-container">
@@ -347,13 +347,13 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="pages/charts/chartjs.html"><i class="fa fa-user"></i> Show list </a></li>
-            <li><a href="pages/charts/morris.html"><i class="fa fa-user-plus"></i> Add New </a></li>
-            <li><a href="pages/charts/morris.html"><i class="fa fa-bar-chart"></i> Statistics </a></li>
+            <li><a href="{{ URL::to('employees') }}"><i class="fa fa-user"></i> Show list </a></li>
+            <li><a href="{{ URL::to('employees/create') }}"><i class="fa fa-user-plus"></i> Add New </a></li>
+            <li><a href="{{ URL::to('employees/update') }}"><i class="fa fa-bar-chart"></i> Statistics </a></li>
           </ul>
         </li>
         <li class="treeview">
-          <a href="#">
+          <a href="{{ URL::to('products') }}">
             <i class="fa fa-product-hunt"></i>
             <span>Products</span>
             <span class="pull-right-container">
@@ -361,13 +361,13 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="pages/charts/chartjs.html"><i class="fa fa-list-ol"></i> Show list </a></li>
-            <li><a href="pages/charts/morris.html"><i class="fa fa-plus"></i> Add New </a></li>
-            <li><a href="pages/charts/morris.html"><i class="fa fa-bar-chart"></i> Statistics </a></li>
+            <li><a href="{{ URL::to('products') }}"><i class="fa fa-list-ol"></i> Show list </a></li>
+            <li><a href="{{ URL::to('products/create') }}"><i class="fa fa-plus"></i> Add New </a></li>
+            <li><a href="{{ URL::to('products/update') }}"><i class="fa fa-bar-chart"></i> Statistics </a></li>
           </ul>
         </li>
         <li class="treeview">
-          <a href="#">
+          <a href="{{ URL::to('customers') }}">
             <i class="fa fa-address-card"></i>
             <span>Customers</span>
             <span class="pull-right-container">
@@ -375,13 +375,13 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="pages/charts/chartjs.html"><i class="fa fa-list-ol"></i> Show list </a></li>
-            <li><a href="pages/charts/morris.html"><i class="fa fa-plus"></i> Add New </a></li>
-            <li><a href="pages/charts/morris.html"><i class="fa fa-bar-chart"></i> Statistics </a></li>
+            <li><a href="{{ URL::to('customers') }}"><i class="fa fa-list-ol"></i> Show list </a></li>
+            <li><a href="{{ URL::to('customers/create') }}"><i class="fa fa-plus"></i> Add New </a></li>
+            <li><a href="{{ URL::to('customers/update') }}"><i class="fa fa-bar-chart"></i> Statistics </a></li>
           </ul>
         </li>
         <li class="treeview">
-          <a href="#">
+          <a href="{{ URL::to('companies') }}">
             <i class="fa fa-building"></i>
             <span>Companies</span>
             <span class="pull-right-container">
@@ -389,13 +389,13 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="pages/charts/chartjs.html"><i class="fa fa-list-ol"></i> Show list </a></li>
-            <li><a href="pages/charts/morris.html"><i class="fa fa-plus"></i> Add New </a></li>
-            <li><a href="pages/charts/morris.html"><i class="fa fa-bar-chart"></i> Statistics </a></li>
+            <li><a href="{{ URL::to('companies') }}"><i class="fa fa-list-ol"></i> Show list </a></li>
+            <li><a href="{{ URL::to('companies/create') }}"><i class="fa fa-plus"></i> Add New </a></li>
+            <li><a href="{{ URL::to('companies/update') }}"><i class="fa fa-bar-chart"></i> Statistics </a></li>
           </ul>
         </li>
         <li class="treeview">
-          <a href="#">
+          <a href="{{ URL::to('orders') }}">
             <i class="fa fa-shopping-cart"></i>
             <span>Orders Status</span>
             <span class="pull-right-container">
@@ -403,9 +403,9 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="pages/charts/chartjs.html"><i class="fa fa-list-ol"></i> Show list </a></li>
-            <li><a href="pages/charts/morris.html"><i class="fa fa-plus"></i> Add New </a></li>
-            <li><a href="pages/charts/morris.html"><i class="fa fa-bar-chart"></i> Statistics </a></li>
+            <li><a href="{{ URL::to('orders') }}"><i class="fa fa-list-ol"></i> Show all Orders </a></li>
+            <li><a href="{{ URL::to('orders/update') }}"><i class="fa fa-plus"></i> Update Orders </a></li>
+            <li><a href="{{ URL::to('orders/show') }}"><i class="fa fa-bar-chart"></i> Filter Orders </a></li>
           </ul>
         </li>
         <li>

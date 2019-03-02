@@ -1,5 +1,5 @@
 @extends('layouts.admin')
 
 @section('content')
-Compnaies index
+update Medical store
 @endsection

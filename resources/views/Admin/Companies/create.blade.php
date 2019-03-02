@@ -1,5 +1,5 @@
 @extends('layouts.admin')
 
-@section
-    Companies index
+@section('content')
+    Companies create
 @endsection

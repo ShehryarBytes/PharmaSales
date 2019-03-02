@@ -1,5 +1,5 @@
 @extends('layouts.admin')
 
-@section
-Add Products
+@section('content')
+Add Medical Store
 @endsection

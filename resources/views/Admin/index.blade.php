@@ -1,5 +1,5 @@
 @extends('layouts.admin')
 
-@section
-Admin index
+@section('content')
+    Admin index
 @endsection

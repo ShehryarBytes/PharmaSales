@@ -1,5 +1,5 @@
 @extends('layouts.admin')
 
 @section('content')
-Compnaies index
+    Show specifics orders
 @endsection
