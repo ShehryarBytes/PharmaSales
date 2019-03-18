@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
+use Illuminate\Support\Facades\Auth;
+
+use App\Products;
 use Illuminate\Http\Request;
 
 class ProductsController extends Controller
@@ -14,7 +18,9 @@ class ProductsController extends Controller
     public function index()
     {
         //
-        return view('admin.products.index');
+        $data = Products::all();
+
+        return view('Admin.Products.index')->with(compact('data'));
     }
 
     /**
@@ -25,7 +31,9 @@ class ProductsController extends Controller
     public function create()
     {
         //
-        return view('admin.products.create');
+        $user = User::find(Auth::id());
+        $id = $user->id;
+        return view('admin.products.create')->with(compact('id'));
     }
 
     /**
@@ -36,7 +44,22 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'Product_Name' => 'required|max:255',
+            'Cost' => 'required',
+            'Tax' => 'required',
+            'KG' => 'required',
+            'T_amount' => 'required',
+            'quantity' => 'required',
+            'batch' => 'required',
+            'Exp_Date' => 'required',
+            'Mfg_Date' => 'required',
+            'Bonus' => 'required',
+    ]);
+
+        Products::create($request->all());
+        return redirect('products');
+
     }
 
     /**
@@ -45,9 +68,10 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
         //
+        return view('admin.products.update');
     }
 
     /**
@@ -71,7 +95,7 @@ class ProductsController extends Controller
     public function update()
     {
         //
-        return view('admin.products.update');
+
     }
 
     /**

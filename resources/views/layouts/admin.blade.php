@@ -349,7 +349,7 @@
           <ul class="treeview-menu">
             <li><a href="{{ URL::to('employees') }}"><i class="fa fa-user"></i> Show list </a></li>
             <li><a href="{{ URL::to('employees/create') }}"><i class="fa fa-user-plus"></i> Add New </a></li>
-            <li><a href="{{ URL::to('employees/update') }}"><i class="fa fa-bar-chart"></i> Statistics </a></li>
+            <li><a href="{{ URL::to('employees/show') }}"><i class="fa fa-bar-chart"></i> Statistics </a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -363,7 +363,7 @@
           <ul class="treeview-menu">
             <li><a href="{{ URL::to('products') }}"><i class="fa fa-list-ol"></i> Show list </a></li>
             <li><a href="{{ URL::to('products/create') }}"><i class="fa fa-plus"></i> Add New </a></li>
-            <li><a href="{{ URL::to('products/update') }}"><i class="fa fa-bar-chart"></i> Statistics </a></li>
+            <li><a href="{{ URL::to('products/show') }}"><i class="fa fa-bar-chart"></i> Statistics </a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -377,7 +377,7 @@
           <ul class="treeview-menu">
             <li><a href="{{ URL::to('customers') }}"><i class="fa fa-list-ol"></i> Show list </a></li>
             <li><a href="{{ URL::to('customers/create') }}"><i class="fa fa-plus"></i> Add New </a></li>
-            <li><a href="{{ URL::to('customers/update') }}"><i class="fa fa-bar-chart"></i> Statistics </a></li>
+            <li><a href="{{ URL::to('customers/show') }}"><i class="fa fa-bar-chart"></i> Statistics </a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -391,7 +391,7 @@
           <ul class="treeview-menu">
             <li><a href="{{ URL::to('companies') }}"><i class="fa fa-list-ol"></i> Show list </a></li>
             <li><a href="{{ URL::to('companies/create') }}"><i class="fa fa-plus"></i> Add New </a></li>
-            <li><a href="{{ URL::to('companies/update') }}"><i class="fa fa-bar-chart"></i> Statistics </a></li>
+            <li><a href="{{ URL::to('companies/show') }}"><i class="fa fa-bar-chart"></i> Statistics </a></li>
           </ul>
         </li>
         <li class="treeview">

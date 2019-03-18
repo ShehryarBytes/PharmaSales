@@ -12,6 +12,6 @@ class Customer extends Model
 
     public function catagory()
     {
-        return $this->hasOne('App/customer_catagory');
+        return $this->hasOne('App\category');
     }
 }
