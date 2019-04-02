@@ -439,9 +439,19 @@
                                     </form>
                               </li>
 
-        <!-- <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
-        <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li> -->
-      </ul>
+        <li class="treeview">
+          <a href="{{ URL::to('enterprise') }}">
+            <i class="fa fa-gear"></i>
+            <span>Account Setting</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{ URL::to('enterprise/create') }}"><i class="fa fa-plus"></i> Add account details </a></li>
+            <li><a href="{{ URL::to('enterprise/update') }}"><i class="fa fa-edit"></i> Update Account details </a></li>
+          </ul>
+        </li>
     </section>
     <!-- /.sidebar -->
   </aside>

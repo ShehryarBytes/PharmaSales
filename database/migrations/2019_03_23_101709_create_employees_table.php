@@ -26,6 +26,8 @@ class CreateEmployeesTable extends Migration
             $table->string('qualification');
             $table->string('Salary');
             $table->date('DOB');
+            $table->string('password');
+            $table->string('photo_id');
             $table->timestamps();
         });
     }

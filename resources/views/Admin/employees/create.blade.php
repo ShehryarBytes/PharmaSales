@@ -3,75 +3,79 @@
 @section('content')
 
     <div class="container">
-        <table class="table table-striped">
-            <tbody>
-                <td colspan="1">
-                    <form class="well form-horizontal">
-                        <fieldset>
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">Full Name</label>
-                                <div class="col-md-8 inputGroupContainer">
-                                    <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span><input id="fullName" name="fullName" placeholder="Full Name" class="form-control" required="true" value="" type="text"></div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">Address Line 1</label>
-                                <div class="col-md-8 inputGroupContainer">
-                                    <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span><input id="addressLine1" name="addressLine1" placeholder="Address Line 1" class="form-control" required="true" value="" type="text"></div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">Address Line 2</label>
-                                <div class="col-md-8 inputGroupContainer">
-                                    <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span><input id="addressLine2" name="addressLine2" placeholder="Address Line 2" class="form-control" required="true" value="" type="text"></div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">City</label>
-                                <div class="col-md-8 inputGroupContainer">
-                                    <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span><input id="city" name="city" placeholder="City" class="form-control" required="true" value="" type="text"></div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">State/Province/Region</label>
-                                <div class="col-md-8 inputGroupContainer">
-                                    <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span><input id="state" name="state" placeholder="State/Province/Region" class="form-control" required="true" value="" type="text"></div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">Postal Code/ZIP</label>
-                                <div class="col-md-8 inputGroupContainer">
-                                    <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span><input id="postcode" name="postcode" placeholder="Postal Code/ZIP" class="form-control" required="true" value="" type="text"></div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">Country</label>
-                                <div class="col-md-8 inputGroupContainer">
-                                    <div class="input-group">
-                                        <span class="input-group-addon" style="max-width: 100%;"><i class="glyphicon glyphicon-list"></i></span>
-                                        <select class="selectpicker form-control">
-                                            <option>A really long option to push the menu over the edget</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">Email</label>
-                                <div class="col-md-8 inputGroupContainer">
-                                    <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span><input id="email" name="email" placeholder="Email" class="form-control" required="true" value="" type="text"></div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">Phone Number</label>
-                                <div class="col-md-8 inputGroupContainer">
-                                    <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span><input id="phoneNumber" name="phoneNumber" placeholder="Phone Number" class="form-control" required="true" value="" type="text"></div>
-                                </div>
-                            </div>
-                        </fieldset>
-                    </form>
-                </td>
-            </tbody>
-        </table>
+
+        <div class="page-header">
+            <h1>Add Employee</h1>
+        </div>
+
+        <div class="well">
+
+                {!! Form::open(['method' => 'POST','action' => 'EmployeesController@store', 'files'=>true]) !!}
+                {{ csrf_field() }}
+                <div class="form-group">
+                    {!! Form::label('Employee Name', 'Employee Name') !!}
+                    {!! Form::text('name', null, ['class' => 'form-control']) !!}
+                </div>
+                <div class="form-group">
+                    {!! Form::label('Email', 'Email') !!}
+                    {!! Form::email('email', null, ['class' => 'form-control']) !!}
+                </div>
+
+                <div class="form-group">
+                    {{ Form::hidden('user_id', $id) }}
+                </div>
+                <div class="form-group">
+                    {!! Form::label('Role', 'Role') !!}
+                    {!! Form::select('role_id',array('Select Role',$role[1],$role[2],$role[3]), null, ['class' => 'form-control']) !!}
+                </div>
+                <div class="form-group">
+                    {!! Form::label('CNIC', 'CNIC') !!}
+                    {!! Form::text('CNIC', null, ['class' => 'form-control']) !!}
+                </div>
+                <div class="form-group">
+                    {!! Form::label('Adress', 'Adress') !!}
+                    {!! Form::text('adress', null, ['class' => 'form-control']) !!}
+                </div>
+                <div class="form-group">
+                    {!! Form::label('Contact', 'Contact') !!}
+                    {!! Form::text('contact', null, ['class' => 'form-control']) !!}
+                </div>
+                <div class="form-group">
+                    {!! Form::label('Gender', 'Gender') !!}
+                    {!! Form::select('gender',array('Select Gender','Male'=>'Male','Female'=>'Female'), null, ['class' => 'form-control']) !!}
+                </div>
+                <div class="form-group">
+                    {!! Form::label('Qualification', 'Qualification') !!}
+                    {!! Form::text('qualification', null, ['class' => 'form-control']) !!}
+                </div>
+                <div class="form-group">
+                    {!! Form::label('Salary', 'Salary') !!}
+                    {!! Form::number('Salary', null, ['class' => 'form-control']) !!}
+                </div>
+                <div class="form-group">
+                    {!! Form::label('D.O.B', 'D.O.B') !!}
+                    {!! Form::date('DOB', null, ['class' => 'form-control']) !!}
+                </div>
+                <div class="form-group">
+                    {!! Form::label('Password', 'Password') !!}
+                    {!! Form::password('password', null, ['class' => 'form-control']) !!}
+                </div>
+                <div class="form-group">
+                    {!! Form::label('Confirm Password', 'Confirm_password') !!}
+                    {!! Form::password('password_confirmation', null, ['class' => 'form-control']) !!}
+                </div>
+                <div class="form-group">
+                    {!! Form::label('Picture', 'Picture') !!}
+                    {!! Form::file('photo_id', null, ['class' => 'form-control']) !!}
+                </div>
+                {!! Form::submit('Submit', ['class' => 'btn btn-info']) !!}
+
+                {!! Form::close() !!}
+
+        </div>
+
+        @include('includes.form_errors')
+
     </div>
 
 

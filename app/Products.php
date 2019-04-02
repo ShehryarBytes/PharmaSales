@@ -21,6 +21,11 @@ class Products extends Model
             'Bonus',
     ];
 
+    public function customers()
+    {
+        return $this->belongsToMany('App\Customer');
+    }
+
 
 
 }

@@ -1,8 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Photo;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Employee;
+use App\User;
+use App\Role;
 
 class EmployeesController extends Controller
 {
@@ -14,7 +18,10 @@ class EmployeesController extends Controller
     public function index()
     {
         //
-        return view('admin.employees.index');
+
+        $data = Employee::all();
+
+        return view('admin.employees.index')->with(compact('data'));
     }
 
     /**
@@ -25,7 +32,10 @@ class EmployeesController extends Controller
     public function create()
     {
         //
-        return view('admin.employees.create');
+        $role = Role::pluck('role_name','id');
+        $user = User::find(Auth::id());
+        $id = $user->id;
+        return view('admin.employees.create')->with(compact('id'))->with(compact('role'));
     }
 
     /**
@@ -36,7 +46,40 @@ class EmployeesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+
+        $validatedData = $request->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|email|unique:employees',
+            'CNIC' => 'required|max:14',
+            'adress' => 'required|max:255',
+            'contact' => 'required|min:11|max:14',
+            'gender' => 'required',
+            'qualification' => 'required',
+            'Salary' => 'required',
+            'DOB' => 'required',
+            'password'=>'required|string|min:6|confirmed',
+        ]);
+
+
+        $input = $request->all();
+
+        if($file = $request->file('photo_id')){
+
+            $name = time().$file->getClientOriginalName();
+
+            $file->move('images',$name);
+
+            $photo = Photo::create(['file'=>$name]);
+            $input['photo_id'] = $photo->id;
+
+        }
+
+        Employee::create($input);
+
+        return redirect('employees');
+
+
     }
 
     /**
@@ -45,10 +88,11 @@ class EmployeesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show($id)
     {
         //
-        return view('admin.employees.update');
+        $user = Employee::findOrFail($id);
+        return view('admin.employees.show')->with(compact('user'));
     }
 
     /**
@@ -60,6 +104,13 @@ class EmployeesController extends Controller
     public function edit($id)
     {
         //
+        $employee = Employee::findOrFail($id);
+        $role = Role::pluck('role_name', 'id');
+        $user = User::find(Auth::id());
+        $id = $user->id;
+        $gender = array('Male','Female');
+        return view('admin.employees.update')->with(compact('id'))->with(compact('role'))->with(compact('gender'))->with(compact('employee'));
+
     }
 
     /**
@@ -69,9 +120,38 @@ class EmployeesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update()
+    public function update(Request $request,$id)
     {
         //
+        $validatedData = $request->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|email',
+            'CNIC' => 'required|max:14',
+            'adress' => 'required|max:255',
+            'contact' => 'required|min:11|max:14',
+            'gender' => 'required',
+            'qualification' => 'required',
+            'Salary' => 'required',
+            'DOB' => 'required',
+        ]);
+
+        $user = Employee::findOrFail($id);
+        $input = $request->all();
+
+        if($file = $request->file('photo_id')){
+
+            $name = time().$file->getClientOriginalName();
+
+            $file->move('images',$name);
+
+            $photo = Photo::create(['file'=>$name]);
+            $input['photo_id'] = $photo->id;
+
+        }
+
+        $user->update($input);
+
+        return redirect('employees');
 
     }
 
@@ -84,5 +164,8 @@ class EmployeesController extends Controller
     public function destroy($id)
     {
         //
+         Employee::findOrFail($id)->delete();
+
+         return redirect('employees');
     }
 }

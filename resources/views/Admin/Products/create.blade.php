@@ -1,12 +1,13 @@
 @extends('layouts.admin')
 
 @section('content')
- <h1>  Add Products  </h1>
+    <div class="container">
 
-<div class="container">
-    <table class="table table-striped">
-        <tbody>
-        <td colspan="1">
+        <div class="page-header">
+            <h1>Add Products</h1>
+        </div>
+
+        <div class="well">
             {!! Form::open(['method' => 'POST','action' => 'ProductsController@store']) !!}
 
             <div class="form-group">
@@ -58,9 +59,6 @@
             {!! Form::submit('Submit', ['class' => 'btn btn-info']) !!}
 
             {!! Form::close() !!}
-        </td>
-        </tbody>
-    </table>
 
     @include('includes.form_errors')
 

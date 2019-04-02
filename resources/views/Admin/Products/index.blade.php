@@ -1,11 +1,13 @@
 @extends('layouts.admin')
 
 @section('content')
-<h1>Products</h1>
 
 <div class="container-fluid">
-    <table class="table">
-        <thead>
+    <div class="page-header">
+        <h1>Products</h1>
+    </div>
+    <table class="table table-striped">
+        <thead class="thead-dark">
         <tr>
             <th>Product Name</th>
             <th>Cost</th>
@@ -16,6 +18,8 @@
             <th>Tax</th>
             <th>Batch</th>
             <th>Total Amount</th>
+            <th>Edit</th>
+            <th>Delete</th>
         </tr>
         </thead>
         <tbody>
@@ -28,9 +32,14 @@
             <td>{{$product->Exp_date}}</td>
             <td>{{$product->Mfg_date}}</td>
             <td>{{$product->bonus}}</td>
-            <td>{{$product->Tax}}</td>
+            <td>{{$product->tax}}</td>
             <td>{{$product->batch}}</td>
             <td>{{$product->T_amount}}</td>
+            <td><a href="{{ URL::to('products/'.$product->id.'/edit')}}"><button class="btn btn-success">Edit</button></a></td>
+            <td>{!! Form::open(['method' => 'DELETE',
+                                 'action' => ['ProductsController@destroy',$product->id]]) !!}
+                {!! Form::submit('Delete',['class'=>'btn btn-danger']) !!}
+                {!! Form::close() !!}</td>
         </tr>
             @endforeach
         @endif
