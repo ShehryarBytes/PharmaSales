@@ -9,8 +9,9 @@ class Area extends Model
     //
     protected $fillable = [
 
-        'code',
+        'user_id',
         'name',
+        'code',
         'no_of_stores',
 
     ];

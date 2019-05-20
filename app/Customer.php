@@ -9,9 +9,27 @@ class Customer extends Model
 {
     //
 
+    protected $fillable = [
 
-    public function catagory()
+        'category_id',
+        'area_id',
+        'Store_Name',
+        'Owner_Name',
+        'C_License_no',
+        'Email',
+        'Address',
+        'Contact',
+
+
+    ];
+
+
+    public function category()
     {
-        return $this->hasOne('App\category');
+        return $this->belongsTo('App\category');
+    }
+    public function area()
+    {
+        return $this->belongsTo('App\Area');
     }
 }

@@ -24,13 +24,18 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('verified'
 
 Route::resource('employees', 'EmployeesController')->middleware('verified');
 
-Route::resource('products', 'ProductsController')->middleware('verified');
+Route::resource('products', 'ProductsController');
 
-Route::resource('customers', 'CustomersController')->middleware('verified');
+Route::resource('customers', 'CustomersController');
 
-Route::resource('companies', 'CompaniesController')->middleware('verified');
+Route::resource('companies', 'CompaniesController');
 
-Route::resource('orders', 'OrdersController')->middleware('verified');
+Route::resource('orders', 'OrdersController');
+
+Route::resource('areas', 'AreasController');
+
+Route::get('gmaps', 'MapController@gmaps');
+
 Route::resource('enterprise', 'EnterprisesController')->middleware('verified');
 
 Route::get('/getarea',function (){

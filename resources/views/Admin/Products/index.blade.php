@@ -18,8 +18,10 @@
             <th>Tax</th>
             <th>Batch</th>
             <th>Total Amount</th>
+            @if(Auth::check() || Auth::guard('employee')->user()->role->name == 'manager')
             <th>Edit</th>
             <th>Delete</th>
+            @endif
         </tr>
         </thead>
         <tbody>
@@ -35,11 +37,13 @@
             <td>{{$product->tax}}</td>
             <td>{{$product->batch}}</td>
             <td>{{$product->T_amount}}</td>
+            @if(Auth::check() || Auth::guard('employee')->user()->role->name == 'Manager')
             <td><a href="{{ URL::to('products/'.$product->id.'/edit')}}"><button class="btn btn-success">Edit</button></a></td>
             <td>{!! Form::open(['method' => 'DELETE',
                                  'action' => ['ProductsController@destroy',$product->id]]) !!}
                 {!! Form::submit('Delete',['class'=>'btn btn-danger']) !!}
                 {!! Form::close() !!}</td>
+                @endif
         </tr>
             @endforeach
         @endif

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Products;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductsController extends Controller
 {
@@ -17,11 +18,17 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        //
-        $data = Products::all();
-
-        return view('Admin.Products.index')->with(compact('data'));
-    }
+        if(Auth::user()) {
+            $data = Products::all();
+            return view('Admin.Products.index')->with(compact('data'));
+     }
+        elseif
+            (Auth::guard('employee'))
+            {
+            $data = Products::all();
+            return view('Admin.Products.index')->with(compact('data'));
+        }
+        }
 
     /**
      * Show the form for creating a new resource.

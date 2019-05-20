@@ -4,8 +4,63 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ebde3c5c1a4aa78555f927906c33e9c6",
+    "content-hash": "2bfb63b691a4a95aba548495f40596ec",
     "packages": [
+        {
+            "name": "bitfumes/laravel-multiauth",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bitfumes/laravel-multiauth.git",
+                "reference": "c709996fbedbc6e903ad1bfab3ca281c96019e91"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bitfumes/laravel-multiauth/zipball/c709996fbedbc6e903ad1bfab3ca281c96019e91",
+                "reference": "c709996fbedbc6e903ad1bfab3ca281c96019e91",
+                "shasum": ""
+            },
+            "require-dev": {
+                "fzaninotto/faker": "^1.9@dev",
+                "illuminate/support": "5.8.*",
+                "mockery/mockery": "^1.0@dev",
+                "orchestra/database": "^3.8@dev",
+                "orchestra/testbench": "^3.8@dev",
+                "phpunit/phpunit": "^7.4@dev"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Bitfumes\\Multiauth\\MultiauthServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Bitfumes\\Multiauth\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "s-sarthak",
+                    "email": "sarthak@bitfumes.com"
+                }
+            ],
+            "description": "Laravel Multiauth package",
+            "keywords": [
+                "Laravel multiauth",
+                "Multi Auth",
+                "admin auth",
+                "bitfumes",
+                "multiauth"
+            ],
+            "time": "2019-03-07T17:22:08+00:00"
+        },
         {
             "name": "dnoegel/php-xdg-base-dir",
             "version": "0.1",
@@ -311,6 +366,56 @@
                 "parser"
             ],
             "time": "2018-03-08T01:11:30+00:00"
+        },
+        {
+            "name": "farhanwazir/laravelgooglemaps",
+            "version": "2.3.9",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/farhanwazir/laravelgooglemaps.git",
+                "reference": "8451e3b0de386e3b779c142692b71645ea75357e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/farhanwazir/laravelgooglemaps/zipball/8451e3b0de386e3b779c142692b71645ea75357e",
+                "reference": "8451e3b0de386e3b779c142692b71645ea75357e",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "5.*",
+                "php": ">=5.6.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.5.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "FarhanWazir\\GoogleMaps\\": "src/FarhanWazir/GoogleMaps/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Farhan Wazir",
+                    "email": "seejee1@gmail.com",
+                    "role": "Author"
+                }
+            ],
+            "description": "Laravel Google Map package for 5.x. You can use all google map features in laravel.",
+            "keywords": [
+                "gmap",
+                "google",
+                "googlemap",
+                "laravel",
+                "map"
+            ],
+            "time": "2018-03-30T21:00:53+00:00"
         },
         {
             "name": "fideloper/proxy",

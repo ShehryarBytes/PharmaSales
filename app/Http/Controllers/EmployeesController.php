@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Employee;
 use App\User;
 use App\Role;
+use Illuminate\Support\Facades\Hash;
 
 class EmployeesController extends Controller
 {
@@ -32,7 +33,7 @@ class EmployeesController extends Controller
     public function create()
     {
         //
-        $role = Role::pluck('role_name','id');
+        $role = Role::pluck('name','id');
         $user = User::find(Auth::id());
         $id = $user->id;
         return view('admin.employees.create')->with(compact('id'))->with(compact('role'));
@@ -63,6 +64,8 @@ class EmployeesController extends Controller
 
 
         $input = $request->all();
+
+        $input['password'] = Hash::make($request['password']);
 
         if($file = $request->file('photo_id')){
 
@@ -105,7 +108,7 @@ class EmployeesController extends Controller
     {
         //
         $employee = Employee::findOrFail($id);
-        $role = Role::pluck('role_name', 'id');
+        $role = Role::pluck('name', 'id');
         $user = User::find(Auth::id());
         $id = $user->id;
         $gender = array('Male','Female');

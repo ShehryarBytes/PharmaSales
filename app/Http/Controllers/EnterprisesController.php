@@ -104,7 +104,7 @@ class EnterprisesController extends Controller
         $data = Enterprise::findOrFail($id);
         $user = User::find(Auth::id());
         $id = $user->id;
-        return view('admin.enterprise')->with(compact('id'))->with(compact('data'));
+        return view('admin.enterprise.edit')->with(compact('id'))->with(compact('data'));
 
     }
 
@@ -118,6 +118,34 @@ class EnterprisesController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $validatedData = $request->validate([
+            'name' => 'required|max:255',
+            'license' => 'required|max:14',
+            'location' => 'required|max:255',
+            'mobile' => 'required|min:11|max:14',
+            'phone' => 'required|min:11|max:14',
+            'disttrict' => 'required',
+            'photo_id' => 'required',
+        ]);
+
+        $user = Enterprise::findOrFail($id);
+        $input = $request->all();
+
+        if($file = $request->file('photo_id')){
+
+            $name = time().$file->getClientOriginalName();
+
+            $file->move('images',$name);
+
+            $photo = Photo::create(['file'=>$name]);
+            $input['photo_id'] = $photo->id;
+
+        }
+
+        $user->update($input);
+
+        return redirect('enterprise');
+
     }
 
     /**

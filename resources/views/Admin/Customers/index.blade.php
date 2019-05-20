@@ -1,49 +1,59 @@
 @extends('layouts.admin')
 
 @section('content')
-<h1>Medical Stores</h1>
-<h1>Employees</h1>
-<div class="container-fluid">
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Firstname</th>
-            <th>Lastname</th>
-            <th>Email</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>Default</td>
-            <td>Defaultson</td>
-            <td>def@somemail.com</td>
-        </tr>
-        <tr class="success">
-            <td>Success</td>
-            <td>Doe</td>
-            <td>john@example.com</td>
-        </tr>
-        <tr class="danger">
-            <td>Danger</td>
-            <td>Moe</td>
-            <td>mary@example.com</td>
-        </tr>
-        <tr class="info">
-            <td>Info</td>
-            <td>Dooley</td>
-            <td>july@example.com</td>
-        </tr>
-        <tr class="warning">
-            <td>Warning</td>
-            <td>Refs</td>
-            <td>bo@example.com</td>
-        </tr>
-        <tr class="active">
-            <td>Active</td>
-            <td>Activeson</td>
-            <td>act@example.com</td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+    <div class="container-fluid">
+        <div class="page-header">
+            <h1>Medical Stores</h1>
+        </div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Category Id</th>
+                <th>Area Id</th>
+                <th>Store Name</th>
+                <th>Owner Name</th>
+                <th>Customer License No</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Contact</th>
+                <th><i class="fa fa-map-marker"></i>Location</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            @if($customers)
+                @foreach($customers as $customer)
+                    <tr>
+                        <td>{{$customer->category->name}}</td>
+                        <td>{{$customer->area->name}}</td>
+                        <td>{{$customer->Store_Name}}</td>
+                        <td>{{$customer->Owner_Name}}</td>
+                        <td>{{$customer->C_License_no}}</td>
+                        <td>{{$customer->Email}}</td>
+                        <td>{{$customer->Address}}</td>
+                        <td>{{$customer->Contact}}</td>
+                        <td><a href="{{url('gmaps')}}" class="fa fa-map-marker">Map</a></td>
+
+                        <td><button type="submit" name="update" value="Edit" class="btn btn-info btn-sm" onclick="window.location='{{url("customers/$customer->id/edit") }}'">Update</button></td>
+
+                        <td>
+                            <div class="form-group">
+
+                                {!! Form::open(['method'=>'DELETE','action'=>['CustomersController@destroy',$customer->id]]) !!}
+
+                                {!! Form::submit('Delete',['class'=>'form-control btn btn-danger btn-sm']) !!}
+
+                                {!! Form::close() !!}
+
+
+                            </div>
+                        </td>
+                    </tr>
+                @endforeach
+            @endif
+            </tbody>
+        </table>
+    </div>
+
 @endsection

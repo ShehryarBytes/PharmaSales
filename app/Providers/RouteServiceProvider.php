@@ -39,8 +39,27 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapWebRoutes();
 
+        $this->mapEmployeeRoutes();
+
         //
+    }    
+    
+    /**
+     * Define the "employee" routes for the application.
+     *
+     * These routes are typically stateless.
+     *
+     * @return void
+     */
+    protected function mapEmployeeRoutes()
+    {
+        Route::prefix('employee')
+             ->middleware(['web'])
+             ->namespace($this->namespace)
+             ->group(base_path('routes/employee.php'));
     }
+
+
 
     /**
      * Define the "web" routes for the application.

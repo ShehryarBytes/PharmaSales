@@ -4,6 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Customer;
+
+use App\Category;
+
+use App\User;
+
+use App\Area;
+
+use Illuminate\Support\Facades\Auth;
+
 class CustomersController extends Controller
 {
     /**
@@ -14,7 +24,11 @@ class CustomersController extends Controller
     public function index()
     {
         //
-        return view('admin.customers.index');
+        $customers = Customer::all();
+
+        return view('admin.customers.index')->with(Compact('customers'));
+
+
     }
 
     /**
@@ -25,7 +39,15 @@ class CustomersController extends Controller
     public function create()
     {
         //
-        return view('admin.customers.create');
+        $category = Category::pluck('name','id');
+
+        $area = Area::pluck('name','id');
+
+        $user = User::find(Auth::id());
+
+        $id = $user->id;
+
+        return view('admin.customers.create')->with(compact('category'))->with(compact('id'))->with(Compact('area'));
     }
 
     /**
@@ -37,6 +59,27 @@ class CustomersController extends Controller
     public function store(Request $request)
     {
         //
+        $validatedData = $request->validate([
+            'category_id' => 'required',
+            'area_id' => 'required',
+            'Store_Name' => 'required|max:255',
+            'Owner_Name' => 'required|max:255',
+            'C_License_no' => 'required',
+            'Email' => 'required|unique:customers',
+            'Address' => 'required',
+            'Contact' => 'required|min:11|max:14',
+
+
+        ]);
+
+        Customer::create($request->all());
+        return redirect('customers');
+
+
+
+
+
+
     }
 
     /**
@@ -48,7 +91,7 @@ class CustomersController extends Controller
     public function show()
     {
         //
-        return view('admin.customers.update');
+        // return view('admin.customers.update');
     }
 
     /**
@@ -60,6 +103,11 @@ class CustomersController extends Controller
     public function edit($id)
     {
         //
+        $category = Category::pluck('name','id');
+        $area = Area::pluck('name','id');
+        $customer = Customer::findOrFail($id);
+        return view('admin.customers.update')->with(Compact('customer'))->with(Compact('area'))->with(Compact('category'));
+
     }
 
     /**
@@ -69,9 +117,14 @@ class CustomersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update()
+    public function update(Request $request, $id)
     {
         //
+        $customer = Customer::findOrFail($id);
+
+        $customer->update($request->all());
+
+        return redirect('customers');
 
     }
 
@@ -84,5 +137,7 @@ class CustomersController extends Controller
     public function destroy($id)
     {
         //
+        $customer = Customer::whereId($id)->delete();
+        return redirect('/customers');
     }
 }

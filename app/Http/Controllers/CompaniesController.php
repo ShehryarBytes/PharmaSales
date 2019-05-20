@@ -4,6 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Companies;
+
+use App\User;
+
+use Illuminate\Support\Facades\Auth;
+
 class CompaniesController extends Controller
 {
     /**
@@ -14,7 +20,10 @@ class CompaniesController extends Controller
     public function index()
     {
         //
-        return view('admin.companies.index');
+        $companies = Companies::all();
+
+
+        return view('admin.companies.index')->with(compact('companies'));
     }
 
     /**
@@ -24,8 +33,11 @@ class CompaniesController extends Controller
      */
     public function create()
     {
-        //
-        return view('admin.companies.create');
+        $user = User::find(Auth::id());
+
+        $id = $user->id;
+
+        return view('admin.companies.create')->with(compact('id'));
     }
 
     /**
@@ -37,6 +49,18 @@ class CompaniesController extends Controller
     public function store(Request $request)
     {
         //
+        $validatedData = $request->validate([
+            'email' => 'required|max:255',
+            'Company_Name' => 'required',
+            'Comany_Lisence_no' => 'required',
+            'C_contact' => 'required',
+            'C_adress' => 'required',
+
+        ]);
+
+        Companies::create($request->all());
+        return redirect('companies');
+
     }
 
     /**
@@ -48,7 +72,7 @@ class CompaniesController extends Controller
     public function show()
     {
         //
-        return view('admin.companies.update');
+        // return view('admin.companies.update');
     }
 
     /**
@@ -60,6 +84,10 @@ class CompaniesController extends Controller
     public function edit($id)
     {
         //
+
+        $companies = Companies::findOrFail($id);
+
+        return view('admin.companies.update')->with(Compact('companies'));
     }
 
     /**
@@ -69,9 +97,16 @@ class CompaniesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update()
+    public function update(Request $request, $id)
     {
         //
+
+        $companies = Companies::findOrFail($id);
+
+        $companies->update($request->all());
+
+        return redirect('companies');
+
     }
 
     /**
@@ -83,5 +118,9 @@ class CompaniesController extends Controller
     public function destroy($id)
     {
         //
+
+        $companies = Companies::whereId($id)->delete();
+
+        return redirect('companies');
     }
 }

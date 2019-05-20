@@ -33,6 +33,9 @@
   <!--[if lt IE 9]>
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="http://maps.google.com/maps/api/js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.24/gmaps.js"></script>
   <![endif]-->
 
   <!-- Google Font -->
@@ -72,7 +75,15 @@
                   <li><!-- start message -->
                     <a href="#">
                       <div class="pull-left">
-                        <img src="{{asset('dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
+                        @if(Auth::check())
+                        @if(auth::user()->enterprise)
+                          <img src="{{URL::to('images/'.auth::user()->enterprise->photo->file)}}"  />
+                        @else
+                          <img src="{{ asset('img/hero-img.png') }}"  />
+                        @endif
+                          @elseif(Auth::guard('employee'))
+                          <img src="{{asset('images/'.auth::guard('employee')->user()->photo->file)}}"  />
+                        @endif
                       </div>
                       <h4>
                         Support Team
@@ -259,7 +270,10 @@
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+
+              @if(Auth::check())
               <span class="hidden-xs">{{ auth::user()->name }}</span>
+                @endif
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
@@ -312,10 +326,20 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+
+          @if(Auth::check())
+          @if (auth::user()->enterprise)
+            <img src="{{URL::to('images/'.auth::user()->enterprise->photo->file)}}" class="img-circle" />
+          @else
+            <img src="{{ asset('img/hero-img.png') }}" class="img-circle" />
+          @endif
+            @endif
         </div>
         <div class="pull-left info">
-          <p>{{ auth::user()->name }}</p>
+
+          @if(Auth::check())
+            <p>{{ auth::user()->name }}</p>
+          @endif
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
@@ -338,6 +362,7 @@
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
           </a>
         </li>
+        @if(Auth::check())
         <li class="treeview">
           <a href="{{ URL::to('employees') }}">
             <i class="fa fa-users"></i>
@@ -352,6 +377,7 @@
             <li><a href="{{ URL::to('employees/show') }}"><i class="fa fa-bar-chart"></i> Statistics </a></li>
           </ul>
         </li>
+        @endif
         <li class="treeview">
           <a href="{{ URL::to('products') }}">
             <i class="fa fa-product-hunt"></i>
@@ -362,10 +388,13 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="{{ URL::to('products') }}"><i class="fa fa-list-ol"></i> Show list </a></li>
+            @if(Auth::check() || Auth::guard('employee')->user()->role->name == 'Manager')
             <li><a href="{{ URL::to('products/create') }}"><i class="fa fa-plus"></i> Add New </a></li>
-            <li><a href="{{ URL::to('products/show') }}"><i class="fa fa-bar-chart"></i> Statistics </a></li>
+            @endif
+              <li><a href="{{ URL::to('products/show') }}"><i class="fa fa-bar-chart"></i> Statistics </a></li>
           </ul>
         </li>
+        @if(Auth::check() || Auth::guard('employee')->user()->role->name == 'Manager')
         <li class="treeview">
           <a href="{{ URL::to('customers') }}">
             <i class="fa fa-address-card"></i>
@@ -376,10 +405,31 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="{{ URL::to('customers') }}"><i class="fa fa-list-ol"></i> Show list </a></li>
-            <li><a href="{{ URL::to('customers/create') }}"><i class="fa fa-plus"></i> Add New </a></li>
-            <li><a href="{{ URL::to('customers/show') }}"><i class="fa fa-bar-chart"></i> Statistics </a></li>
+              @if(Auth::check() || Auth::guard('employee')->user()->role->name == 'Manager')
+              <li><a href="{{ URL::to('customers/create') }}"><i class="fa fa-plus"></i> Add New </a></li>
+              @endif
+              <li><a href="{{ URL::to('customers/show') }}"><i class="fa fa-bar-chart"></i> Statistics </a></li>
           </ul>
         </li>
+        @endif
+        @if(Auth::check() || Auth::guard('employee')->user()->role->name == 'Manager')
+        <li class="treeview">
+          <a href="{{ URL::to('areas') }}">
+            <i class="fa fa-location-arrow"></i>
+            <span>Areas</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{ URL::to('areas') }}"><i class="fa fa-list-ol"></i> Show list </a></li>
+            <li><a href="{{ URL::to('areas/create') }}"><i class="fa fa-plus"></i> Add New </a></li>
+            <li><a href="{{ URL::to('areas/update') }}"><i class="fa fa-bar-chart"></i> Statistics </a></li>
+          </ul>
+        </li>
+        @endif
+
+          @if(Auth::check() || Auth::guard('employee')->user()->role->name == 'Manager')
         <li class="treeview">
           <a href="{{ URL::to('companies') }}">
             <i class="fa fa-building"></i>
@@ -394,6 +444,7 @@
             <li><a href="{{ URL::to('companies/show') }}"><i class="fa fa-bar-chart"></i> Statistics </a></li>
           </ul>
         </li>
+          @endif
         <li class="treeview">
           <a href="{{ URL::to('orders') }}">
             <i class="fa fa-shopping-cart"></i>
@@ -428,6 +479,18 @@
           </a>
         </li>
         <li class="header">Account</li>
+        {{--@if(Auth::guard('employee'))--}}
+          {{--<li><a class="dropdown-item" href="{{ route('employee.logout') }}"--}}
+                 {{--onclick="event.preventDefault();--}}
+                                                     {{--document.getElementById('logout-form').submit();">--}}
+              {{--{{ __('Logout') }}--}}
+            {{--</a>--}}
+
+            {{--<form id="logout-form" action="{{ route('employee.logout') }}" method="POST" style="display: none;">--}}
+              {{--@csrf--}}
+            {{--</form>--}}
+          {{--</li>--}}
+        {{--@else--}}
         <li><a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -437,8 +500,8 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
-                              </li>
-
+        </li>
+        @if(Auth::check())
         <li class="treeview">
           <a href="{{ URL::to('enterprise') }}">
             <i class="fa fa-gear"></i>
@@ -447,9 +510,17 @@
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
+          @endif
+
           <ul class="treeview-menu">
-            <li><a href="{{ URL::to('enterprise/create') }}"><i class="fa fa-plus"></i> Add account details </a></li>
-            <li><a href="{{ URL::to('enterprise/update') }}"><i class="fa fa-edit"></i> Update Account details </a></li>
+
+                @if(Auth::check())
+                @if(empty(auth::user()->enterprise))<li><a href="{{ URL::to('enterprise/create') }}"><i class="fa fa-plus"></i> Add account details </a></li>@endif
+                @if(!empty(auth::user()->enterprise))
+                        <li><a href="{{ URL::to('enterprise/'. auth::user()->enterprise->id).'/edit'}}"><i class="fa fa-edit"></i> Update Account details </a></li>
+                        <li><a href="{{ URL::to('enterprise')}}"><i class="fa fa-user-md"></i> View Profile </a></li>
+                    @endif
+                @endif
           </ul>
         </li>
     </section>
