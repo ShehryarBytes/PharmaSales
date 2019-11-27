@@ -17,7 +17,7 @@
             <th>Bonus</th>
             <th>Tax</th>
             <th>Batch</th>
-            <th>Total Amount</th>
+            <th>Unit Price</th>
             @if(Auth::check() || Auth::guard('employee')->user()->role->name == 'manager')
             <th>Edit</th>
             <th>Delete</th>

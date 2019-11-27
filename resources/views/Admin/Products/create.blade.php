@@ -25,7 +25,7 @@
 
             <div class="form-group">
                 {!! Form::label('Quantity', 'Quantity') !!}
-                {!! Form::number('quantity', null, ['class' => 'form-control']) !!}
+                {!! Form::number('quantity', null, ['class' => 'form-control','id'=>'quantity']) !!}
             </div>
             <div class="form-group">
                 {!! Form::label('Tax', 'Tax') !!}
@@ -48,12 +48,12 @@
                 {!! Form::date('Mfg_Date', null, ['class' => 'form-control']) !!}
             </div>
             <div class="form-group">
-                {!! Form::label('Cost', 'Cost') !!}
-                {!! Form::number('Cost', null, ['class' => 'form-control']) !!}
+                {!! Form::label('Unit Price', 'Unit_Price') !!}
+                {!! Form::number('Cost', null, ['class' => 'form-control','id' => 'u-price','onkeyup'=>'sum();']) !!}
             </div>
             <div class="form-group">
                 {!! Form::label('Total Amount', 'Total Amount') !!}
-                {!! Form::number('T_amount', null, ['class' => 'form-control']) !!}
+                {!! Form::number('T_amount', null, ['class' => 'form-control','id'=>'total']) !!}
             </div>
 
             {!! Form::submit('Submit', ['class' => 'btn btn-info']) !!}
@@ -61,6 +61,24 @@
             {!! Form::close() !!}
 
     @include('includes.form_errors')
+            <script type="text/javascript">
+
+                function sum() {
+
+                    let txtFirstNumberValue = document.getElementById('quantity').value;
+                    let txtSecondNumberValue = document.getElementById('u-price').value;
+
+                    if (txtFirstNumberValue == 0)
+                        txtFirstNumberValue = 0;
+                    if (txtSecondNumberValue == 0)
+                        txtSecondNumberValue = 0;
+
+                    let result = parseInt(txtFirstNumberValue) + parseInt(txtSecondNumberValue);
+                        document.getElementById('total').value = result;
+                }
+
+
+            </script>
 
 </div>
 

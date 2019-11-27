@@ -22,7 +22,7 @@
                 @foreach($data as $employee)
                     <tr>
                         <td><a href="{{ URL::to('employees/'.$employee->id)}}">{{$employee->name}}</a></td>
-                        <td>{{$employee->role->role_name}}</td>
+                        <td>{{$employee->role->name}}</td>
                         <td>{{$employee->CNIC}}</td>
                         <td>{{$employee->adress}}</td>
                         <td>{{$employee->email}}</td>

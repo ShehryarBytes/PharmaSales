@@ -2,16 +2,15 @@
 
 namespace App;
 
-
 use Illuminate\Database\Eloquent\Model;
 
 class Customer extends Model
 {
     //
-
     protected $fillable = [
 
         'category_id',
+        'user_id',
         'area_id',
         'Store_Name',
         'Owner_Name',
@@ -31,5 +30,9 @@ class Customer extends Model
     public function area()
     {
         return $this->belongsTo('App\Area');
+    }
+    public function location()
+    {
+        return $this->hasOne('App\Location');
     }
 }

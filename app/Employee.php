@@ -16,6 +16,8 @@ class Employee extends Authenticatable
      *
      * @var array
      */
+
+
     protected $fillable = [
 
         'name',
@@ -43,6 +45,11 @@ class Employee extends Authenticatable
     {
         return $this->belongsTo('App\Photo');
     }
+    public function orders()
+    {
+        return $this->hasMany('App\Order');
+    }
+
 
     /**
      * The attributes that should be hidden for arrays.

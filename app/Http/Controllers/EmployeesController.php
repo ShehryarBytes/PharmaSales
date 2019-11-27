@@ -20,7 +20,9 @@ class EmployeesController extends Controller
     {
         //
 
-        $data = Employee::all();
+        $user = Auth::User();
+        $id = $user->id;
+        $data = Employee::where('user_id',$id)->get();
 
         return view('admin.employees.index')->with(compact('data'));
     }

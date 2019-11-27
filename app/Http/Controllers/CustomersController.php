@@ -24,9 +24,22 @@ class CustomersController extends Controller
     public function index()
     {
         //
-        $customers = Customer::all();
+        if(Auth::guard('employee')->user())
+        {
+            $user = User::find(Auth::guard('employee')->user()->user_id);
+            $id = $user->id;
+            $customers = Customer::where('user_id',$id)->get();
+
+            return view('admin.customers.index')->with(Compact('customers'));
+
+        }
+
+        $user = Auth::User();
+        $id = $user->id;
+        $customers = Customer::where('user_id',$id)->get();
 
         return view('admin.customers.index')->with(Compact('customers'));
+
 
 
     }
@@ -67,7 +80,7 @@ class CustomersController extends Controller
             'C_License_no' => 'required',
             'Email' => 'required|unique:customers',
             'Address' => 'required',
-            'Contact' => 'required|min:11|max:14',
+            'Contact' => 'required|min:11|max:16',
 
 
         ]);
@@ -125,6 +138,14 @@ class CustomersController extends Controller
         $customer->update($request->all());
 
         return redirect('customers');
+
+    }
+    public function testing()
+    {
+        //
+
+
+        return view('admin.customers.testing');
 
     }
 

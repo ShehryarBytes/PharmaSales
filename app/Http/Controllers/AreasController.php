@@ -20,10 +20,18 @@ class AreasController extends Controller
     public function index()
     {
         //
+        if(Auth::guard('employee')->user()) {
+            $user = User::find(Auth::guard('employee')->user()->user_id);
+            $id = $user->id;
+            $areas = Area::where('user_id', $id)->get();
+            return view('admin.areas.index')->with(Compact('areas'));
+        }
 
-        $areas = Area::all();
-
+        $user = Auth::User();
+        $id = $user->id;
+        $areas = Area::where('user_id', $id)->get();
         return view('admin.areas.index')->with(Compact('areas'));
+
     }
 
     /**

@@ -51,6 +51,11 @@
                     {!! Form::text('Contact', null, ['class' => 'form-control']) !!}
                 </div>
 
+            <div class="form-group">
+                {!! Form::label('Set Location', 'Set Location') !!}
+                <button type="button" name="location" href="{{ URL::to('testing') }}">Location</button>
+            </div>
+
 
 
                 {!! Form::submit('Submit', ['class' => 'btn btn-info']) !!}

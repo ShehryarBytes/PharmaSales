@@ -18,16 +18,17 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        if(Auth::user()) {
-            $data = Products::all();
-            return view('Admin.Products.index')->with(compact('data'));
-     }
-        elseif
-            (Auth::guard('employee'))
-            {
-            $data = Products::all();
+        if(Auth::guard('employee')->user()) {
+            $user = User::find(Auth::guard('employee')->user()->user_id);
+            $id = $user->id;
+            $data = Products::where('user_id', $id)->get();
             return view('Admin.Products.index')->with(compact('data'));
         }
+        $user = Auth::User();
+        $id = $user->id;
+        $data = Products::where('user_id', $id)->get();
+        return view('Admin.Products.index')->with(compact('data'));
+
         }
 
     /**

@@ -20,11 +20,19 @@ class CompaniesController extends Controller
     public function index()
     {
         //
+        if(Auth::guard('employee')->user()) {
+            $user = User::find(Auth::guard('employee')->user()->user_id);
+            $id = $user->id;
+            $companies = Companies::all();
+            return view('admin.companies.index')->with(compact('companies'));
+        }
+
+        $user = Auth::User();
         $companies = Companies::all();
-
-
         return view('admin.companies.index')->with(compact('companies'));
-    }
+
+
+        }
 
     /**
      * Show the form for creating a new resource.

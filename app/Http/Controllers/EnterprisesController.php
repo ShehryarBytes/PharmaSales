@@ -20,8 +20,8 @@ class EnterprisesController extends Controller
         //
         $user = User::find(Auth::id());
         $id = $user->id;
-        $data = Enterprise::all()->first();
-         return view('admin.enterprise.index')->with(compact('data'));
+        $data = Enterprise::where('user_id',$id)->first();
+        return view('admin.enterprise.index')->with(compact('data'));
     }
 
     /**

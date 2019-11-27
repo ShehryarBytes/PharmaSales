@@ -30,19 +30,27 @@ Route::resource('customers', 'CustomersController');
 
 Route::resource('companies', 'CompaniesController');
 
+Route::resource('/cart', 'CartController');
+
 Route::resource('orders', 'OrdersController');
+
+Route::resource('orderdetails', 'OrderdetailsController');
 
 Route::resource('areas', 'AreasController');
 
 Route::get('gmaps', 'MapController@gmaps');
 
+Route::get('testing', 'CustomersController@testing');
+
 Route::resource('enterprise', 'EnterprisesController')->middleware('verified');
 
-Route::get('/getarea',function (){
+Route::get('cart/{id}', 'OrdersController@cart');
+
+Route::get('/getarea', function () {
 
     $pro = \App\User::find(1);
 
-        echo $pro->enterprise;
+    echo $pro->enterprise;
 
 });
 

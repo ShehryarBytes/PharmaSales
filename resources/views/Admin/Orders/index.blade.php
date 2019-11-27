@@ -1,50 +1,45 @@
 @extends('layouts.admin')
 
 @section('content')
-    <h1>Orders Details</h1>
-
     <div class="container-fluid">
+        <div class="page-header">
+            <h1>Orders</h1>
+        </div>
         <table class="table">
             <thead>
             <tr>
-                <th>Firstname</th>
-                <th>Lastname</th>
-                <th>Email</th>
+                <th>Orders Details</th>
+                {{--<th>Customer-Name</th>--}}
+                {{--<th>Employee-Name</th>--}}
+                <th>Total Amount</th>
+                @if(Auth::check() || Auth::guard('employee')->user()->role->name == 'Manager')
+                <th>Delete</th>
+                    @endif
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>Default</td>
-                <td>Defaultson</td>
-                <td>def@somemail.com</td>
-            </tr>
-            <tr class="success">
-                <td>Success</td>
-                <td>Doe</td>
-                <td>john@example.com</td>
-            </tr>
-            <tr class="danger">
-                <td>Danger</td>
-                <td>Moe</td>
-                <td>mary@example.com</td>
-            </tr>
-            <tr class="info">
-                <td>Info</td>
-                <td>Dooley</td>
-                <td>july@example.com</td>
-            </tr>
-            <tr class="warning">
-                <td>Warning</td>
-                <td>Refs</td>
-                <td>bo@example.com</td>
-            </tr>
-            <tr class="active">
-                <td>Active</td>
-                <td>Activeson</td>
-                <td>act@example.com</td>
-            </tr>
+            
+                @foreach($orders as $order)
+                    <tr>
+                        <td><a href="#">Orders details</a></td>
+                        {{--<td>{{$order->customer->Store_Name}}</td>--}}
+                        {{--<td>{{$order->employee->name}}</td>--}}
+                        <td>{{$order->total_amount}}</td>
+                        <td>
+                          <div class="form-group">
+                              @if(Auth::check() || Auth::guard('employee')->user()->role->name == 'Manager')
+                          {!! Form::open(['method'=>'DELETE','action'=>['OrdersController@destroy',$order->id]]) !!}
+                          {!! Form::submit('Delete',['class'=>'form-control btn btn-danger btn-sm']) !!}
+                                @endif
+                         {!! Form::close() !!}
+
+
+                          </div>
+                        </td>
+                    </tr>
+                @endforeach
+            
             </tbody>
         </table>
     </div>
-
 @endsection
